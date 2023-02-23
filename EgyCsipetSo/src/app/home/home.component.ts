@@ -19,4 +19,6 @@ export class HomeComponent {
     (error) => { console.log(error); });
   }
 
+  etelek = [ "pizza", "leves", "tészta"]
+  osszetevok= ["sajt", "vaj", "tojás"];
 }
