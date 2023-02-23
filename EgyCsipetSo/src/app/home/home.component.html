@@ -4,30 +4,24 @@
 </app-header>
 
 <main>
-<<<<<<< HEAD
-
-    <div class="accordion" id="accordionPanelsStayOpenExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-              
-=======
     <div class="accordion accordion-flush" id="accordionExample">
-        <div class="accordion-item" *ngFor="let etel of etelek; let i = index;">
+        <div class="accordion-item" *ngFor="let etel of recipes; let i = index;">
           <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#accordion-item-' + i">
-              {{etel}}
->>>>>>> 18619d930ace1ddca3242ff0ef1037b51ad5050d
+              {{etel.nev}}
             </button>
           </h2>
           <div [attr.id]="'accordion-item-' + i" class="accordion-collapse collapse" aria-labelledby="headingOne">
             <div class="accordion-body">
                 Összetevők
               <ul>
-                  <li *ngFor="let osszetevo of osszetevok">
-                      {{ osszetevo }}
+                  <li *ngFor="let osszetevo of etel.osszetevok; let i = index;">
+                    {{ etel.osszegek[i] }} {{ osszetevo }} 
                   </li>
               </ul>
+              <p>
+                {{ etel.elkeszites }}
+              </p>
             </div>
           </div>
         </div>

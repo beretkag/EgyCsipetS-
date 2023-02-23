@@ -15,8 +15,15 @@ export class HomeComponent {
 
   ngOnInit() {
     this.httpService.getRecipes().subscribe(
-    (response) => { this.recipes = response; },
+    (response) => { 
+      this.recipes = response;
+      for (let i = 0; i < this.recipes.length; i++) {
+        this.recipes[i].osszetevok = this.recipes[i].hozzavalok.split(',');
+        this.recipes[i].osszegek = this.recipes[i].mennyisegek.split(',');
+      }
+     },
     (error) => { console.log(error); });
+
   }
 
   etelek = [ "pizza", "leves", "tészta"]
