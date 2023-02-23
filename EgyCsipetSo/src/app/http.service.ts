@@ -7,12 +7,42 @@ import { HttpClient, HttpParams } from  '@angular/common/http';
 })
 export class HttpService {
 
-  private serverUrl = 'http://localhost/2-14 SZFT 2022-2023/Projektek/EgyCsipetSo/EgyCsipetSo/API/database.php';
+  private serverUrl = 'http://localhost/PHP API projektek/EgyCsipetSo/EgyCsipetSo/API/database.php';
 
   constructor(private http: HttpClient) {}
 
   getRecipes() {
     return this.http.get(this.serverUrl+'?table=receptek');
+  }
+
+  UpdateRecipes(recipe:any){
+    let data ={
+      table: "receptek",
+      field: "ID",
+      value: recipe.ID,
+      values: {
+        nev: recipe.nev,
+        elkeszites: recipe.elkeszites,
+        hozzavalok: "",
+        mennyisegek: ""
+      }
+    }
+    for (let i = 0; i < recipe.osszetevok.length; i++) {
+      data.values.hozzavalok += recipe.osszetevok[i] + ","
+      data.values.mennyisegek += recipe.osszegek[i] + ","
+    }
+    data.values.hozzavalok = data.values.hozzavalok.substring(0, data.values.hozzavalok.length-1);
+    data.values.mennyisegek = data.values.mennyisegek.substring(0, data.values.mennyisegek.length-1);
+
+    return this.http.patch(this.serverUrl, {body: data});
+  }
+
+  DeleteRecipe(id: number){
+    let data = {  table: "receptek",
+      id: id
+    };
+
+    return  this.http.delete(this.serverUrl, {body: data});
   }
 
 }
