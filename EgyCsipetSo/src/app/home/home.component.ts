@@ -12,7 +12,16 @@ export class FilterPipe implements PipeTransform {
       if (items.length == 0 || !filter || filter == "") {
           return items;
       }
-      return items.filter(item => item.nev.toLowerCase().replace(' ', '').includes(filter.toLowerCase()));
+      return items.filter(item => item.nev.toLowerCase().replace(' ', '').includes(filter.toLowerCase()) || this.OsszetevoKereses(item, filter));
+  }
+
+  OsszetevoKereses(item: any, filter: string){
+    for (let i = 0; i < item.osszetevok.length; i++) {
+      if (item.osszetevok[i].osszetevo.toLowerCase().replace(' ', '').includes(filter.toLowerCase())) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 
@@ -49,8 +58,36 @@ export class HomeComponent {
 
   }
 
-  EditIngredient(osszetevo: any){
-    osszetevo.szerkesztes = !osszetevo.szerkesztes;
+  AddIngredient(etel: any){
+    etel.osszetevok.push({
+      szerkesztes: true,
+      osszetevo: "",
+      mennyiseg: ""
+    })
+  }
+
+  EditIngredients(etel: any){
+    for (let i = 0; i < etel.osszetevok.length; i++) {
+      etel.osszetevok[i].szerkesztes = false;
+    }
+    etel.Ingredientsediting = !etel.Ingredientsediting;
+  }
+
+  SaveEditIngredients(etel: any){
+    this.httpService.UpdateRecipes(etel).subscribe(
+      (response)=>{
+        this.EditIngredients(etel);
+      },
+      (error) => { console.log(error); });
+
+  }
+
+  EditIngredient(etel:any, osszetevo: any, idx:number){
+    if (osszetevo.osszetevo == "" && osszetevo.mennyiseg == "") {
+      etel.osszetevok.splice(idx, 1)
+    }else{
+      osszetevo.szerkesztes = !osszetevo.szerkesztes;
+    }
   }
 
   EditText(ID: number){
@@ -60,10 +97,9 @@ export class HomeComponent {
   SaveEditText(ID: number){
     this.httpService.UpdateRecipes( this.recipes.find((x:any) => x.ID == ID)).subscribe(
       (response)=>{
-
+        this.EditText(ID);
       },
       (error) => { console.log(error); });
-    this.EditText(ID);
   }
 
   DeleteRecipe(ID: number){

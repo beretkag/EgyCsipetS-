@@ -26,26 +26,36 @@
               <div class="col-5 p-2">
                   <h5>Összetevők</h5>
                   <table>
-                <ul>
-                  <li *ngFor="let osszetevo of etel.osszetevok; let idx = index;">
-                      <tr class="p-0 m-0">
-                        <td *ngIf="!osszetevo.szerkesztes">{{ osszetevo.mennyiseg }}</td>
-                        <td *ngIf="osszetevo.szerkesztes" ><input type="text" [(ngModel)]="osszetevo.mennyiseg" style="width: 120px;"></td>
-                        <td *ngIf="!osszetevo.szerkesztes">{{ osszetevo.osszetevo }}</td>
-                        <td *ngIf="osszetevo.szerkesztes" ><input type="text" [(ngModel)]="osszetevo.osszetevo" style="width: 120px;"></td>
-                        <td>
-                          <button class="btn btn-sm" (click)="EditIngredient(osszetevo)">
-                            <i class="bi bi-pen"></i>
+                    <ul>
+                      <li *ngFor="let osszetevo of etel.osszetevok; let idx = index;">
+                        <tr class="m-3">
+                          <td *ngIf="!osszetevo.szerkesztes">{{ osszetevo.mennyiseg }}</td>
+                          <td *ngIf="osszetevo.szerkesztes" ><input type="text" [(ngModel)]="osszetevo.mennyiseg" style="width: 120px;"></td>
+                          <td *ngIf="!osszetevo.szerkesztes">{{ osszetevo.osszetevo }}</td>
+                          <td *ngIf="osszetevo.szerkesztes" ><input type="text" [(ngModel)]="osszetevo.osszetevo" style="width: 120px;"></td>
+                          <td>
+                            <button *ngIf="(!osszetevo.szerkesztes && etel.Ingredientsediting)" class="btn btn-sm" (click)="EditIngredient(etel, osszetevo, idx)">
+                              <i class="bi bi-pen"></i>
+                            </button>
+                            <button *ngIf="(osszetevo.szerkesztes && etel.Ingredientsediting)" class="btn btn-sm" (click)="EditIngredient(etel, osszetevo, idx)">
+                              <i class="bi bi-check-lg"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </li>
+                      <li class="mt-2" *ngIf="etel.Ingredientsediting">
+                        <tr>
+                          <button class="btn btn-primary btn-sm rounded-circle" (click)="AddIngredient(etel)">
+                            <i class="bi bi-plus-lg"></i>
                           </button>
-                        </td>
-                      </tr>
-                    </li>
-                  </ul>
-                </table>
-              </div>
+                        </tr>
+                      </li>
+                    </ul>
+                  </table>
+                </div>
               <div class="col-1">
-                <button *ngIf="!etel.Ingredientsediting" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></button>
-                <button *ngIf="etel.Ingredientsediting" class="btn btn-primary btn-sm rounded-circle"><i class="bi bi-check2-circle"></i></button>
+                <button *ngIf="!etel.Ingredientsediting" (click)="EditIngredients(etel)" class="btn btn-primary btn-sm"><i class="bi bi-pencil"></i></button>
+                <button *ngIf="etel.Ingredientsediting" (click)="SaveEditIngredients(etel)" class="btn btn-primary btn-sm rounded-circle"><i class="bi bi-check2-circle"></i></button>
               </div>
               <div class="col-5 p-3">
                 <h5>Elkészítés</h5>

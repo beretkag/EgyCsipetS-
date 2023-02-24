@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from  '@angular/common/http';
 })
 export class HttpService {
 
-  private serverUrl = 'http://localhost/2-14 SZFT 2022-2023/Projektek/EgyCsipetSo/EgyCsipetSo/API/database.php';
+  private serverUrl = 'http://localhost/PHP API projektek/EgyCsipetSo/EgyCsipetSo/API/database.php';
 
   constructor(private http: HttpClient) {}
 
