@@ -9,12 +9,12 @@
     --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(200,111,94, 0.50);
 }
 
-.btn{
+.btn-primary{
     background-color: rgb(200,111,94);
     border-color: rgba(200,111,94, 0.50);
 }
 
-.btn:active{
+.btn-primary:active{
     background-color: rgba(200,111,94, 0.50);
     border-color: rgba(200,111,94, 0.50);
 }

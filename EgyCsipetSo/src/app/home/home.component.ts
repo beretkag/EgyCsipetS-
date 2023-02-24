@@ -33,14 +33,24 @@ export class HomeComponent {
     (response) => { 
       this.recipes = response;
       for (let i = 0; i < this.recipes.length; i++) {
-        this.recipes[i].osszetevok = this.recipes[i].hozzavalok.split(',');
-        this.recipes[i].osszegek = this.recipes[i].mennyisegek.split(',');
         this.recipes[i].Textediting = false;
         this.recipes[i].Ingredientsediting = false;
+        this.recipes[i].osszetevok = [];
+        for (let j = 0; j < this.recipes[i].hozzavalok.split(',').length; j++) {
+          this.recipes[i].osszetevok.push({
+            osszetevo: this.recipes[i].hozzavalok.split(',')[j],
+            mennyiseg: this.recipes[i].mennyisegek.split(',')[j],
+            szerkesztes: false
+          })
+        }
       }
      },
     (error) => { console.log(error); });
 
+  }
+
+  EditIngredient(osszetevo: any){
+    osszetevo.szerkesztes = !osszetevo.szerkesztes;
   }
 
   EditText(ID: number){

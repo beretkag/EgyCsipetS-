@@ -27,10 +27,17 @@
                   <h5>Összetevők</h5>
                   <table>
                 <ul>
-                  <li *ngFor="let osszetevo of etel.osszetevok; let i = index;">
-                      <tr>
-                        <td>{{ etel.osszegek[i] }}</td>
-                        <td>{{ osszetevo }}</td>
+                  <li *ngFor="let osszetevo of etel.osszetevok; let idx = index;">
+                      <tr class="p-0 m-0">
+                        <td *ngIf="!osszetevo.szerkesztes">{{ osszetevo.mennyiseg }}</td>
+                        <td *ngIf="osszetevo.szerkesztes" ><input type="text" [(ngModel)]="osszetevo.mennyiseg" style="width: 120px;"></td>
+                        <td *ngIf="!osszetevo.szerkesztes">{{ osszetevo.osszetevo }}</td>
+                        <td *ngIf="osszetevo.szerkesztes" ><input type="text" [(ngModel)]="osszetevo.osszetevo" style="width: 120px;"></td>
+                        <td>
+                          <button class="btn btn-sm" (click)="EditIngredient(osszetevo)">
+                            <i class="bi bi-pen"></i>
+                          </button>
+                        </td>
                       </tr>
                     </li>
                   </ul>

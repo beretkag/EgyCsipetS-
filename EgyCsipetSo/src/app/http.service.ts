@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from  '@angular/common/http';
 })
 export class HttpService {
 
-  private serverUrl = 'http://localhost/PHP API projektek/EgyCsipetSo/EgyCsipetSo/API/database.php';
+  private serverUrl = 'http://localhost/2-14 SZFT 2022-2023/Projektek/EgyCsipetSo/EgyCsipetSo/API/database.php';
 
   constructor(private http: HttpClient) {}
 
@@ -27,14 +27,15 @@ export class HttpService {
         mennyisegek: ""
       }
     }
+
     for (let i = 0; i < recipe.osszetevok.length; i++) {
-      data.values.hozzavalok += recipe.osszetevok[i] + ","
-      data.values.mennyisegek += recipe.osszegek[i] + ","
+      data.values.hozzavalok += recipe.osszetevok[i].osszetevo + ","
+      data.values.mennyisegek += recipe.osszetevok[i].mennyiseg + ","
     }
     data.values.hozzavalok = data.values.hozzavalok.substring(0, data.values.hozzavalok.length-1);
     data.values.mennyisegek = data.values.mennyisegek.substring(0, data.values.mennyisegek.length-1);
 
-    return this.http.patch(this.serverUrl, {body: data});
+    return this.http.patch(this.serverUrl, data);
   }
 
   DeleteRecipe(id: number){
