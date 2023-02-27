@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Feb 23. 14:08
+-- Létrehozás ideje: 2023. Feb 27. 12:30
 -- Kiszolgáló verziója: 10.4.6-MariaDB
 -- PHP verzió: 7.3.8
 
@@ -43,7 +43,14 @@ CREATE TABLE `receptek` (
 --
 
 INSERT INTO `receptek` (`ID`, `nev`, `elkeszites`, `hozzavalok`, `mennyisegek`) VALUES
-(1, 'Vajas kenyér', 'Vágjunk egy szelet kenyeret, majd egy késsel kenjük rá a vajat.\r\nÍzlés szerint sózzuk, borsozzuk.\r\nEzt követően már fogyasztható is.', 'kenyér,vaj', '1 szelet,1 késnyi');
+(14, 'Pica fish', ' fisht fogd meg majd susd\r\nmeg', 'pica,fish', '1 pici,1 fishy'),
+(23, 'Cica mica', 'simi', 'mica', 'Cica'),
+(24, 'Fishy', '', '', ''),
+(31, 'Halas spenot', '', '', ''),
+(32, 'Paradicsomleves', 'Ízlés szerint öntsünk vizet a tányérba, és már kész is.', 'tányér,meleg víz', '1 vörös,1 liter '),
+(33, 'Sablon recept', '', '', ''),
+(34, 'Béka láb', '', '', ''),
+(35, 'Kárbonara', 'Keverjük össze a tejfölt a tésztával.', 'tészta,tejföl,megyegybambi', '1/2 kiló,200g ,ennyi');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -63,7 +70,7 @@ ALTER TABLE `receptek`
 -- AUTO_INCREMENT a táblához `receptek`
 --
 ALTER TABLE `receptek`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
