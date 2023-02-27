@@ -34,6 +34,7 @@ export class HomeComponent {
 
   recipes: any;
   filter = "";
+  nev="";
 
   constructor(private httpService: HttpService) { }
 
@@ -45,13 +46,16 @@ export class HomeComponent {
         this.recipes[i].Textediting = false;
         this.recipes[i].Ingredientsediting = false;
         this.recipes[i].osszetevok = [];
-        for (let j = 0; j < this.recipes[i].hozzavalok.split(',').length; j++) {
-          this.recipes[i].osszetevok.push({
-            osszetevo: this.recipes[i].hozzavalok.split(',')[j],
-            mennyiseg: this.recipes[i].mennyisegek.split(',')[j],
-            szerkesztes: false
-          })
+        if (this.recipes.osszetevok.length!=0) {
+          for (let j = 0; j < this.recipes[i].hozzavalok.split(',').length; j++) {
+            this.recipes[i].osszetevok.push({
+              osszetevo: this.recipes[i].hozzavalok.split(',')[j],
+              mennyiseg: this.recipes[i].mennyisegek.split(',')[j],
+              szerkesztes: false
+            })
+          }  
         }
+        
       }
      },
     (error) => { console.log(error); });
@@ -105,9 +109,23 @@ export class HomeComponent {
   DeleteRecipe(ID: number){
     this.httpService.DeleteRecipe(ID).subscribe(
     (response) => {
-      this.recipes.splice(this.recipes.indexOf((x:any) => x.ID == ID), 1);
+      this.recipes.splice(this.recipes.findIndex((x:any) => x.ID == ID), 1);
     },
     (error) => { console.log(error); });
+  }
+
+  AddNewRecipe(nev:string){
+    let recipe={
+      nev:nev,
+      elkeszites:"",
+      osszetevok:[]
+    }
+    this.httpService.InsertRecipe(recipe).subscribe(
+      (response) => {
+        this.ngOnInit()
+        this.nev=""
+      },
+      (error) => { console.log(error); });
   }
 
 }

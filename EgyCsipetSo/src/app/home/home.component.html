@@ -9,7 +9,7 @@
       <input type="text" class="form-control" placeholder="Keresés..." [(ngModel)]="filter">
     </div>
     <div class="col-4 text-end">
-      <button class="btn btn-primary">Új Recept Hozzáadása <i class="bi bi-clipboard-plus"></i></button>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Új Recept Hozzáadása <i class="bi bi-clipboard-plus"></i></button>
     </div>
   </div>
   <div class="row">
@@ -82,4 +82,23 @@
         </div>
       </div>
     </div>
-</main>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Új recept hozzáadása</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="input-group mb-3">
+                  <input type="text" class="form-control" [(ngModel)]="nev" placeholder="Recept neve">
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Mégse</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="AddNewRecipe(nev)">Felvétel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>

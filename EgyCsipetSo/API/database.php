@@ -48,7 +48,7 @@
                 $value = "%$value%";
             }
             try{
-                $results = $db->query("SELECT * FROM $table WHERE $field $op '$value'")->fetchAll();  
+                $results = $db->query("SELECT * FROM $table WHERE $field $op '$value'")->fetchAll();
             }
             catch(PDOException $Exception){
                 $results = array(
@@ -72,7 +72,7 @@
             // GET ALL RECORDS
             if (isset($table)){
                 try{
-                    $results = $db->query("SELECT * FROM $table")->fetchAll();
+                    $results = $db->query("SELECT * FROM $table ORDER BY ID DESC")->fetchAll();
                 }
                 catch(PDOException $Exception){
                     $results = array(
